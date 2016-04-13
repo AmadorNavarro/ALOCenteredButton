@@ -9,8 +9,8 @@
 
 typedef NS_ENUM(NSUInteger, ALOCenteredButtonOrientation) {
     ALOCenteredButtonOrientationRightToLeft,
-    ALOCenteredButtonOrientationLeftToRight,
-    ALOCenteredButtonOrientationVertical
+    ALOCenteredButtonOrientationVertical,
+    ALOCenteredButtonOrientationVerticalBottomToTop
 };
 
 @interface ALOCenteredButton : UIButton
