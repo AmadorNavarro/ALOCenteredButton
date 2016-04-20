@@ -33,6 +33,7 @@ static CGFloat const kALODefaultImageLabelSpacing = 10.f;
 {
     _buttonOrientation = ALOCenteredButtonOrientationVertical;
     _imageLabelSpacing = kALODefaultImageLabelSpacing;
+    [self updateInsets];
 }
 
 - (void)layoutIfInSuperview
@@ -47,6 +48,7 @@ static CGFloat const kALODefaultImageLabelSpacing = 10.f;
 {
     if (_imageLabelSpacing != imageLabelSpacing) {
         _imageLabelSpacing = imageLabelSpacing;
+        [self updateInsets];
         [self layoutIfInSuperview];
     }
 }
@@ -55,7 +57,19 @@ static CGFloat const kALODefaultImageLabelSpacing = 10.f;
 {
     if (_buttonOrientation != buttonOrientation) {
         _buttonOrientation = buttonOrientation;
+        [self updateInsets];
         [self layoutIfInSuperview];
+    }
+}
+
+- (void)updateInsets
+{
+    if (self.buttonOrientation == ALOCenteredButtonOrientationRightToLeft || self.buttonOrientation == ALOCenteredButtonOrientationLeftToRight) {
+        self.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, self.imageLabelSpacing);
+        self.titleEdgeInsets = UIEdgeInsetsMake(0, self.imageLabelSpacing, 0, -self.imageLabelSpacing);
+    } else {
+        self.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
+        self.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
     }
 }
 
@@ -71,6 +85,7 @@ static CGFloat const kALODefaultImageLabelSpacing = 10.f;
                               MAX(labelSize.height, imageSize.height));
             
         case ALOCenteredButtonOrientationVertical:
+        case ALOCenteredButtonOrientationVerticalBottomToTop:
             return CGSizeMake(MAX(labelSize.width, imageSize.width),
                               labelSize.height + imageSize.height + self.imageLabelSpacing);
     }
