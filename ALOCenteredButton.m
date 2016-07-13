@@ -120,6 +120,7 @@ static CGFloat const kALODefaultImageLabelSpacing = 10.f;
                                        truncf((self.bounds.size.height - sumHeight) / 2),
                                        self.bounds.size.width, self.titleLabel.frame.size.height);
         self.titleLabel.frame = labelFrame;
+        self.titleLabel.center = self.currentImage ? self.titleLabel.center : CGPointMake(self.titleLabel.center.x, self.bounds.size.height / 2);
         
         // reposition image
         CGRect imageFrame = self.imageView.frame;
